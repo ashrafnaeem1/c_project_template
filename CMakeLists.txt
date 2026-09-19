@@ -1,30 +1,45 @@
-cmake_minimum_required(VERSION 4.3)
+cmake_minimum_required(VERSION 4.0)
 
-project(ProjectName)
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_C_STANDARD 17)
+# Declare project as pure C
+project(MyCProject VERSION 1.0.0 LANGUAGES C)
+
+# Modern C23 standard configuration for CMake 4.x
+set(CMAKE_C_STANDARD 23)
 set(CMAKE_C_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_C_EXTENSIONS OFF)
-add_executable(main)
-target_sources(main
-    PRIVATE
-    ./src/main.c
-)
-add_library(Helpers)
-target_sources(Helpers
-    PRIVATE
-    ./src/Helpers.c
 
+# Force MSVC flags globally so MSBuild applies /std:clatest to all C files
+if(MSVC)
+    add_compile_options(
+        /std:clatest # Exposes MSVC's latest C23 compiler features (like nullptr)
+        /W4 # High warning level
+        /utf-8 # Match source and execution character sets
+    )
+endif()
+
+# Define executable
+add_executable(MyCProjectApp
+    src/main.c
+    src/two_sums.c
+)
+
+# Flexible Include Paths Setup
+target_include_directories(MyCProjectApp
     PUBLIC
-    FILE_SET HEADERS
-    BASE_DIRS
-    ./include
-    FILES
-    ./include/Helpers.h
-)
-target_link_libraries(main
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include>
     PRIVATE
-    Helpers
+    ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
+
+# --------------------------------------------------------------------
+# Package Management & Subdirectory Integration Placeholders
+# --------------------------------------------------------------------
+
+# Option A: Adding a local library (e.g., third_party/foo)
+# add_subdirectory(third_party/foo)
+# target_link_libraries(MyCProjectApp PRIVATE foo)
+
+# Option B: Importing an external installed package via vcpkg/Conan
+# find_package(CURL REQUIRED)
+# target_link_libraries(MyCProjectApp PRIVATE CURL::libcurl)
