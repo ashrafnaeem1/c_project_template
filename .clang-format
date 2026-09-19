@@ -1,0 +1,34 @@
+---
+Language: Cpp # Also used for C
+BasedOnStyle: Microsoft
+
+# ---- Common customisations (edit these) ----
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+ColumnLimit: 120
+PointerAlignment: Left
+ReferenceAlignment: Left
+QualifierAlignment: Left
+
+# Brace style (Microsoft already uses Allman-ish)
+BreakBeforeBraces: Allman
+
+# Other nice defaults
+AlignConsecutiveAssignments: Consecutive
+AlignConsecutiveDeclarations: Consecutive
+AlignTrailingComments: true
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+BinPackArguments: false
+BinPackParameters: false
+SpaceAfterCStyleCast: false
+SpaceBeforeParens: ControlStatements
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
+SortIncludes: CaseSensitive
+IncludeBlocks: Regroup
+
+# Keep comments readable
+ReflowComments: true

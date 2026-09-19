@@ -7,4 +7,4 @@
 /// @param target
 /// @param returnSize
 /// @return
-int *twoSum(int *nums, int numsSize, int target, int *returnSize);
+int* twoSum(int* nums, int numsSize, int target, int* returnSize);

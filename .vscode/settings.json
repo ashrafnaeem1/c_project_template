@@ -1,7 +1,34 @@
 {
+  // CMake Tools
   "cmake.configureOnOpen": true,
+  "cmake.generator": "Visual Studio 17 2022",
+  "cmake.preferredGenerators": [
+    "Visual Studio 17 2022",
+    "Ninja"
+  ],
+  "cmake.buildDirectory": "${workspaceFolder}/build/${buildKit}/${buildType}",
+  "cmake.configureSettings": {
+    "CMAKE_TOOLCHAIN_FILE": "${env:VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+    "VCPKG_TARGET_TRIPLET": "x64-windows"
+  },
+
+  // C/C++ extension
   "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
   "C_Cpp.default.cStandard": "c23",
+  "C_Cpp.default.intelliSenseMode": "windows-msvc-x64",
   "C_Cpp.default.compilerPath": "cl.exe",
-  "C_Cpp.default.intelliSenseMode": "windows-msvc-x64"
+  "C_Cpp.clang_format_style": "file",
+  "C_Cpp.clang_format_fallbackStyle": "Microsoft",
+  "C_Cpp.formatting": "clangFormat",
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "ms-vscode.cpptools",
+
+  // Files
+  "files.associations": {
+    "*.h": "c",
+    "*.c": "c"
+  },
+
+  // Terminal
+  "terminal.integrated.defaultProfile.windows": "Command Prompt"
 }
